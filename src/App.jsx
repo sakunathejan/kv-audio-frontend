@@ -1,23 +1,38 @@
 import './App.css'
 import ProductCard  from './components/productCard'
+import { RxDashboard } from "react-icons/rx";
+import { FaRegBookmark } from "react-icons/fa";
+import { MdOutlineSpeaker } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
 
 function App() {
   
 
   return (
-    <div>
-        {/*Product 01*/}
-      <ProductCard name="Audio Setup" 
-      price="3250/-" 
-      description="jjddbsdbbbk kdfhfhdghd uhfhdfjdhhd" 
-      productUrl="https://img.drz.lazcdn.com/g/kf/S6cfb0ee8d9f74ebb9660fd04b3622e364.jpg_400x400q75.jpg_.webp"/>
+    <div className="w-full h-screen flex">
+        <div class="w-[400px] h-full bg-green-200">
+            <button className="w-full  h-[40px] text-[25px] font-bold flex justify-center items-center gap-2">
+                <RxDashboard/>
+                Dashboard
+            </button>
+            <button className="w-full  h-[40px] text-[25px] font-bold flex justify-center items-center gap-2">
+                <FaRegBookmark/>
+                Bookings
+            </button>
+            <button className="w-full  h-[40px] text-[25px] font-bold flex justify-center items-center gap-2">
+                <MdOutlineSpeaker/>
+                Items
+            </button>
+            <button className="w-full  h-[40px] text-[25px] font-bold flex justify-center items-center gap-2">
+                <FaRegUser/>
+                Users
+            </button>
+        </div>
+        <div className="w-full bg-red-900">
+            
 
-       {/*Product 02*/}
-      <ProductCard name="Live Sound Card and Audio Interface"
-      price="5800/-"
-      description="Live Sound Card and Audio Interface with DJ Mixer Effects and Voice Changer,Prefect for Streaming/Podcasting/Gaming"
-      productUrl="https://img.drz.lazcdn.com/g/kf/Sd2b375e96ffc480192cf6e196d5ebe46w.jpg_720x720q80.jpg_.webp"/>
-
+        </div>
+        
     </div>
   )
 }
