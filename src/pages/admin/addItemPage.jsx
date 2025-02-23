@@ -29,10 +29,6 @@ export default function AddItemPage() {
         {
             try
             {
-                if (!productCategory) {
-                    throw new Error("Category is required");
-                }
-
                 const result = await axios.post("http://localhost:3000/api/products" , {
                     key: productKey,
                     name: productName, 
@@ -91,17 +87,18 @@ export default function AddItemPage() {
                     type="number" 
                     placeholder="Product Price" 
                     value={productPrice} 
-                    onChange={(e) => setProductPrice(e.target.value)}
+                    onChange={(e) => setProductPrice(Number(e.target.value))}
                     className="border p-2 w-full"
                 />
-                <select 
-                    value={productCategory}  
+                <select
+                    value={productCategory}
                     onChange={(e) => setProductCategory(e.target.value)}
-                    className="border p-2 w-full"
+                    className="w-full p-2 border rounded"
                 >
                     <option value="audio">Audio</option>
                     <option value="lights">Lights</option>
                 </select>
+
                 <input 
                     type="text" 
                     placeholder="Product Dimensions" 
@@ -109,7 +106,7 @@ export default function AddItemPage() {
                     onChange={(e) => setProductDimensions(e.target.value)}
                     className="border p-2 w-full"
                 />
-                <input 
+                <textarea 
                     type="text" 
                     placeholder="Product Description" 
                     value={productDescription} 

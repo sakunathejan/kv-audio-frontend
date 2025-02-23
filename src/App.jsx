@@ -5,6 +5,7 @@ import HomePage from './pages/home/homePage';
 import Testing from './components/testing';
 import LoginPage from './pages/login/login';
 import { Toaster } from 'react-hot-toast';
+import UpdateItemPage from './pages/admin/updateItemPage';
 
 function App() {
   return (
