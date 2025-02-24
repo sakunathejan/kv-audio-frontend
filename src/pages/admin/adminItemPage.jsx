@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 
@@ -16,7 +15,8 @@ export default function AdminItemPage() {
         if(!itemsLoaded)
         {
             const token = localStorage.getItem("token");
-            axios.get("http://localhost:3000/api/products", {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL
+            axios.get(`${backendUrl}/api/products` , {
                 headers: { "Authorization": `Bearer ${token}` }
             })
             .then((res) => {
@@ -35,7 +35,8 @@ export default function AdminItemPage() {
         if(window.confirm("Are you sure you want to delete this item ?")){
             setItems(items.filter((item)=>item.key !== key));
             const token = localStorage.getItem("token");
-            axios.delete(`http://localhost:3000/api/products/${key}`, {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL
+            axios.delete(`${backendUrl}/api/products/${key}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             }).then((res)=>{
                 console.log(res.data);

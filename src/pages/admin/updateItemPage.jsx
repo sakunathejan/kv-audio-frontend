@@ -28,8 +28,10 @@ export default function UpdateItemPage() {
 		const token = localStorage.getItem("token");
 
 		if (token) {
-			try {
-				const result = await axios.put("http://localhost:3000/api/products/" + productKey,
+			try 
+            {
+                const backendUrl = import.meta.env.VITE_BACKEND_URL
+				const result = await axios.put(`${backendUrl}/api/products/`  + productKey,
 					{
 						name: productName,
 						price: productPrice,

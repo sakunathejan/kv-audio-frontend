@@ -29,7 +29,8 @@ export default function AddItemPage() {
         {
             try
             {
-                const result = await axios.post("http://localhost:3000/api/products" , {
+                const backendUrl = import.meta.env.VITE_BACKEND_URL
+                const result = await axios.post(`${backendUrl}/api/products`  , {
                     key: productKey,
                     name: productName, 
                     price: productPrice,
