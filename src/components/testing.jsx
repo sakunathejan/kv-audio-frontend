@@ -1,49 +1,25 @@
 import { useState } from "react"
+import mediaUpload from "../utils/mediaUpload";
+
 
 export default function Testing(){
-    const[count, setCount] = useState(0)
-    const [itemName , setItemName] = useState("Coconut")
+
+    const [file , setFile] = useState(null);
+    
+    function uploadeFile()
+    {
+        console.log(file)
+        mediaUpload(file).then((url)=>{
+            console.log(url)
+        })
+    }
 
     return(
-        <div className="w-full  h-screen bg-blue-300 flex flex-col justify-center items-center">
-            <h1 className="text-6xl">{count}{itemName}s</h1>
-            
-            <button className="w-[200px] h-[60px] bg-black text-white rounded-lg text-3xl" onClick={()=>
-                    {
-                        const newCount = count + 1
-                        setCount(newCount)
-                    }
-                }>
-                Count
+        <div className="w-full  h-screen flex flex-col justify-center items-center">
+            <input type="file"onChange={(e)=>{setFile(e.target.files[0])}}/>
+            <button  onClick={uploadeFile}  className="w-[200px] h-[50px] bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200 mt-6">
+                Upload
             </button>
-
-            <div className="w-full flex justify-evenly items-center p-4 ">
-                <button className="w-[200px] h-[60px] bg-black text-white rounded-lg text-3xl" 
-                    
-                    onClick={()=>{setItemName("Coconut")}}>                    
-                   
-                    Coconut
-                </button>
-
-                <button className="w-[200px] h-[60px] bg-black text-white rounded-lg text-3xl"
-                    
-                    onClick={()=>{setItemName("Banana")}}>
-                    Banana
-                </button>
-
-                <button className="w-[200px] h-[60px] bg-black text-white rounded-lg text-3xl"
-                
-                    onClick={()=>{setItemName("Apple")}}>
-                    Apple
-                </button>
-
-                <button className="w-[200px] h-[60px] bg-black text-white rounded-lg text-3xl"
-                    onClick={()=>{setItemName("Other")}}>
-                    Other
-                </button>
-
-            </div>
-
         </div>
-    )
+    );
 }
