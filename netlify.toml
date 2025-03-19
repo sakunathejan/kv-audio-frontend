@@ -4,13 +4,13 @@ to ="/index.html"
 status=200
 
 [[headers]]
-for = "/assets/".jpg
+for = "/assets/*.jpg"
 [headers.values]
  Content-Type = "image/jpeg"
  Cache-Control = "public , max-age=31536000"
 
  [[headers]]
-for = "/assets/".png
+for = "/assets/*.png"
 [headers.values]
  Content-Type = "image/png"
  Cache-Control = "public , max-age=31536000"
