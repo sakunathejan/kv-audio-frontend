@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/mediaUpload";
 
 export default function UpdateItemPage() {
     const location = useLocation()
@@ -14,9 +15,20 @@ export default function UpdateItemPage() {
 	const [productCategory, setProductCategory] = useState(location.state.category);
 	const [productDimensions, setProductDimensions] = useState(location.state.dimensions);
 	const [productDescription, setProductDescription] = useState(location.state.description);
+    const[productImages , setProductImages] = useState([])
     const navigate = useNavigate()
     
 	async function handleAddItem() {
+
+        console.log(productImages)
+        const promises = []
+        for(let i = 0; i< productImages.length; i++)
+        {
+            console.log(productImages[i]) 
+            const promise = mediaUpload(productImages[i])
+            promises.push(promise) 
+        }
+        
 		console.log(
 			productKey,
 			productName,
@@ -30,6 +42,7 @@ export default function UpdateItemPage() {
 		if (token) {
 			try 
             {
+                const imageUrls = await Promise.all(promises);
                 const backendUrl = import.meta.env.VITE_BACKEND_URL
 				const result = await axios.put(`${backendUrl}/api/products/`  + productKey,
 					{
@@ -38,6 +51,7 @@ export default function UpdateItemPage() {
 						category: productCategory,
 						dimensions: productDimensions,
 						description: productDescription,
+                        image:imageUrls,
 					},
 					{
 						headers: {
@@ -104,6 +118,7 @@ export default function UpdateItemPage() {
 					onChange={(e) => setProductDescription(e.target.value)}
 					className="w-full p-2 border rounded"
 				/>
+                <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="w-full p-2 border-rounded"/>
 				<button
 					onClick={handleAddItem}
 					className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"

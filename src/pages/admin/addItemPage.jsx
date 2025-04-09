@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/mediaUpload";
 
 export default function AddItemPage() {
     const [productKey, setProductKey] = useState("");
@@ -10,10 +11,20 @@ export default function AddItemPage() {
     const [productCategory, setProductCategory] = useState("audio");
     const [productDimensions, setProductDimensions] = useState("");
     const [productDescription, setProductDescription] = useState("");
+    const[productImages , setProductImages] = useState([])
     const navigate = useNavigate()
 
     async function handleAddItem()
     {
+        console.log(productImages)
+        const promises = []
+        for(let i = 0; i< productImages.length; i++)
+        {
+            console.log(productImages[i]) 
+            const promise = mediaUpload(productImages[i])
+            promises.push(promise) 
+        }
+
         console.log("Sending product data:", {
             key: productKey,
             name: productName,
@@ -29,6 +40,14 @@ export default function AddItemPage() {
         {
             try
             {
+                
+                // Promise.all(promises).then((result)=>{
+                //     console.log(result)
+                // }).catch((err)=>{
+                //     toast.error(err)
+                // })
+
+                const imageUrls = await Promise.all(promises);
                 const backendUrl = import.meta.env.VITE_BACKEND_URL
                 const result = await axios.post(`${backendUrl}/api/products`  , {
                     key: productKey,
@@ -36,7 +55,8 @@ export default function AddItemPage() {
                     price: productPrice,
                     category: productCategory,
                     dimensions: productDimensions,
-                    description: productDescription
+                    description: productDescription,
+                    image : imageUrls,
                 }, {
 
                     headers:{
@@ -114,6 +134,7 @@ export default function AddItemPage() {
                     onChange={(e) => setProductDescription(e.target.value)}
                     className="border p-2 w-full"
                 />
+                <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="w-full p-2 border-rounded"/>
                 <button onClick={handleAddItem} className="bg-blue-500 text-white p-2 rounded w-full">Add</button>
                 <button onClick={()=>(navigate("/admin/items"))} className="bg-red-500 text-white p-2 rounded w-full">Cancel</button>
 
