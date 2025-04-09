@@ -18,16 +18,24 @@ export default function UpdateItemPage() {
     const[productImages , setProductImages] = useState([])
     const navigate = useNavigate()
     
-	async function handleAddItem() {
+	async function handleUpdateItem() {
 
-        console.log(productImages)
-        const promises = []
-        for(let i = 0; i< productImages.length; i++)
+        let updatingImages = location.state.image
+
+        if(productImages.length > 0)
         {
-            console.log(productImages[i]) 
-            const promise = mediaUpload(productImages[i])
-            promises.push(promise) 
-        }
+            // console.log(productImages)
+            const promises = []
+
+            for(let i = 0; i< productImages.length; i++)
+            {
+                console.log(productImages[i]) 
+                const promise = mediaUpload(productImages[i])
+                promises.push(promise) 
+            }
+
+            updatingImages = await Promise.all(promises);
+        }        
         
 		console.log(
 			productKey,
@@ -42,7 +50,6 @@ export default function UpdateItemPage() {
 		if (token) {
 			try 
             {
-                const imageUrls = await Promise.all(promises);
                 const backendUrl = import.meta.env.VITE_BACKEND_URL
 				const result = await axios.put(`${backendUrl}/api/products/`  + productKey,
 					{
@@ -51,7 +58,7 @@ export default function UpdateItemPage() {
 						category: productCategory,
 						dimensions: productDimensions,
 						description: productDescription,
-                        image:imageUrls,
+                        image:updatingImages,
 					},
 					{
 						headers: {
@@ -120,7 +127,7 @@ export default function UpdateItemPage() {
 				/>
                 <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="w-full p-2 border-rounded"/>
 				<button
-					onClick={handleAddItem}
+					onClick={handleUpdateItem}
 					className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
 				>
 					Update Item

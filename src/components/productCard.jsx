@@ -24,7 +24,7 @@ export default function ProductCard({ item }) {
             <span className="font-medium">Dimensions:</span> {item.dimensions}
           </div>
         </div>
-        <div className=" flex justify-end h-full p-4 border-t border-gray-200 mt-5">
+        <div className=" flex justify-end h-full p-4 border-t border-gray-200 ">
           <button className="w-[90%] h-[40px] bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200 absolute mx-auto  bottom-3 ">
             View Details
           </button>
