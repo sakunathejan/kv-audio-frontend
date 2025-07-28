@@ -45,12 +45,12 @@ export default function AdminItemPage() {
   }
 
   return (
-    <div className="min-h-screen bg-primary p-6">
+    <div className="min-h-screen bg-primary p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Products Management</h1>
-          <p className="text-white/80">Manage your audio equipment inventory</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Products Management</h1>
+          <p className="text-white/80 text-sm sm:text-base">Manage your audio equipment inventory</p>
         </div>
 
         {/* Products Table */}
@@ -59,14 +59,14 @@ export default function AdminItemPage() {
             <table className="w-full">
               <thead className="bg-white/20">
                 <tr className="text-left">
-                  <th className="p-4 text-white font-semibold">Image</th>
-                  <th className="p-4 text-white font-semibold">Key</th>
-                  <th className="p-4 text-white font-semibold">Name</th>
-                  <th className="p-4 text-white font-semibold">Price</th>
-                  <th className="p-4 text-white font-semibold">Category</th>
-                  <th className="p-4 text-white font-semibold">Dimensions</th>
-                  <th className="p-4 text-white font-semibold">Availability</th>
-                  <th className="p-4 text-white font-semibold text-center">Actions</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm">Image</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm hidden sm:table-cell">Key</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm">Name</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm">Price</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm hidden md:table-cell">Category</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm hidden lg:table-cell">Dimensions</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm">Status</th>
+                  <th className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -77,25 +77,29 @@ export default function AdminItemPage() {
                       index % 2 === 0 ? "bg-white/5" : "bg-white/10"
                     } hover:bg-white/20 transition-all`}
                   >
-                    <td className="p-4">
+                    <td className="p-2 sm:p-4">
                       <img
                         src={product.image[0]}
                         alt={product.name}
-                        className="w-16 h-16 object-cover rounded-lg"
+                        className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
                       />
                     </td>
-                    <td className="p-4 text-white font-mono text-sm">{product.key}</td>
-                    <td className="p-4 text-white font-semibold">{product.name}</td>
-                    <td className="p-4 text-[#efac38] font-bold">Rs. {product.price.toLocaleString()}</td>
-                    <td className="p-4">
-                      <span className="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">
+                    <td className="p-2 sm:p-4 text-white font-mono text-xs hidden sm:table-cell">{product.key}</td>
+                    <td className="p-2 sm:p-4 text-white font-semibold text-xs sm:text-sm max-w-[120px] sm:max-w-none truncate">
+                      {product.name}
+                    </td>
+                    <td className="p-2 sm:p-4 text-[#efac38] font-bold text-xs sm:text-sm">
+                      Rs. {product.price.toLocaleString()}
+                    </td>
+                    <td className="p-2 sm:p-4 hidden md:table-cell">
+                      <span className="inline-block px-2 py-1 bg-accent/20 text-accent rounded-full text-xs">
                         {product.category}
                       </span>
                     </td>
-                    <td className="p-4 text-white/80 text-sm">{product.dimensions}</td>
-                    <td className="p-4">
+                    <td className="p-2 sm:p-4 text-white/80 text-xs hidden lg:table-cell">{product.dimensions}</td>
+                    <td className="p-2 sm:p-4">
                       <span
-                        className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
+                        className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
                           product.availability
                             ? "bg-green-500 text-white"
                             : "bg-red-500 text-white"
@@ -104,28 +108,28 @@ export default function AdminItemPage() {
                         {product.availability ? "Available" : "Not Available"}
                       </span>
                     </td>
-                    <td className="p-4">
-                      <div className="flex items-center justify-center space-x-2">
+                    <td className="p-2 sm:p-4">
+                      <div className="flex items-center justify-center space-x-1 sm:space-x-2">
                         <Link
                           to={`/product/${product.key}`}
-                          className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+                          className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
                           title="View Product"
                         >
-                          <FaEye className="text-white text-sm" />
+                          <FaEye className="text-white text-xs sm:text-sm" />
                         </Link>
                         <Link
                           to={`/admin/update-item/${product.key}`}
-                          className="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center hover:bg-yellow-600 transition-colors"
+                          className="w-6 h-6 sm:w-8 sm:h-8 bg-yellow-500 rounded-lg flex items-center justify-center hover:bg-yellow-600 transition-colors"
                           title="Edit Product"
                         >
-                          <FaEdit className="text-white text-sm" />
+                          <FaEdit className="text-white text-xs sm:text-sm" />
                         </Link>
                         <button
                           onClick={() => handleDelete(product.key)}
-                          className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                          className="w-6 h-6 sm:w-8 sm:h-8 bg-red-500 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
                           title="Delete Product"
                         >
-                          <FaTrashAlt className="text-white text-sm" />
+                          <FaTrashAlt className="text-white text-xs sm:text-sm" />
                         </button>
                       </div>
                     </td>
@@ -156,10 +160,10 @@ export default function AdminItemPage() {
         {products.length > 0 && (
           <Link
             to="/admin/add-item"
-            className="fixed bottom-6 right-6 w-16 h-16 bg-[#efac38] rounded-full flex items-center justify-center hover:bg-[#efac38]/80 transition-colors shadow-lg"
+            className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 bg-[#efac38] rounded-full flex items-center justify-center hover:bg-[#efac38]/80 transition-colors shadow-lg"
             title="Add New Product"
           >
-            <FaPlus className="text-white text-2xl" />
+            <FaPlus className="text-white text-xl sm:text-2xl" />
           </Link>
         )}
       </div>
