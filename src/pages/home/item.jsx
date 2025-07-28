@@ -60,24 +60,24 @@ export default function Items() {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Products</h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">Discover our high-quality audio equipment</p>
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Our Products</h1>
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">Discover our high-quality audio equipment</p>
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8 border border-gray-200 dark:border-gray-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {/* Search */}
             <div className="relative">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                className="w-full h-[40px] sm:h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-sm sm:text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -87,7 +87,7 @@ export default function Items() {
             <div className="relative">
               <FaFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <select
-                className="w-full h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors appearance-none"
+                className="w-full h-[40px] sm:h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-sm sm:text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors appearance-none"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
@@ -103,7 +103,7 @@ export default function Items() {
             <div className="relative">
               <FaFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <select
-                className="w-full h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors appearance-none"
+                className="w-full h-[40px] sm:h-[45px] bg-gray-50 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-sm sm:text-lg pl-12 pr-4 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors appearance-none"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
@@ -116,7 +116,7 @@ export default function Items() {
 
             {/* Results Count */}
             <div className="flex items-center justify-center">
-              <span className="text-gray-600 dark:text-gray-400">
+              <span className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                 {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
               </span>
             </div>
@@ -125,13 +125,13 @@ export default function Items() {
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">No products found</h3>
-            <p className="text-gray-600 dark:text-gray-400">Try adjusting your search or filter criteria</p>
+          <div className="text-center py-8 sm:py-12">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🔍</div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-2">No products found</h3>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Try adjusting your search or filter criteria</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {filteredProducts.map((product) => (
               <ProductCard key={product.key} product={product} />
             ))}
