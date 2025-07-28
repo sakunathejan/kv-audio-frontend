@@ -54,7 +54,7 @@ export default function Header(){
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center space-x-8">
+                    <nav className="hidden lg:flex items-center space-x-8">
                         {navigationItems.map((item) => (
                             <Link
                                 key={item.to}
@@ -68,7 +68,7 @@ export default function Header(){
                     </nav>
 
                     {/* Right Side - Theme Toggle and User Menu */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 lg:space-x-4">
                         {/* Theme Toggle */}
                         <ThemeToggle />
 
@@ -77,10 +77,10 @@ export default function Header(){
                             <div className="relative">
                                 <button
                                     onClick={() => setShowUserMenu(!showUserMenu)}
-                                    className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                                    className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-800 px-3 lg:px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                                 >
                                     <FaUser className="text-gray-600 dark:text-gray-400" />
-                                    <span className="font-medium text-gray-900 dark:text-white">{user.firstName}</span>
+                                    <span className="hidden sm:block font-medium text-gray-900 dark:text-white">{user.firstName}</span>
                                 </button>
                                 
                                 {showUserMenu && (
@@ -114,16 +114,16 @@ export default function Header(){
                                 )}
                             </div>
                         ) : (
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-2 lg:space-x-3">
                                 <Link
                                     to="/login"
-                                    className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium"
+                                    className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium text-sm lg:text-base"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+                                    className="bg-blue-600 text-white px-3 lg:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm lg:text-base"
                                 >
                                     Register
                                 </Link>
@@ -133,7 +133,7 @@ export default function Header(){
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setShowMobileMenu(!showMobileMenu)}
-                            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                         >
                             {showMobileMenu ? <FaTimes /> : <FaBars />}
                         </button>
@@ -142,13 +142,13 @@ export default function Header(){
 
                 {/* Mobile Navigation */}
                 {showMobileMenu && (
-                    <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                    <div className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-700">
                         <nav className="flex flex-col space-y-3">
                             {navigationItems.map((item) => (
                                 <Link
                                     key={item.to}
                                     to={item.to}
-                                    className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium"
+                                    className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
                                     onClick={() => setShowMobileMenu(false)}
                                 >
                                     <item.icon className="text-sm" />
