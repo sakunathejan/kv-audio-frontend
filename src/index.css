@@ -1,3 +1,6 @@
+/* Import custom styles first */
+@import './App.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -5,22 +5,22 @@ import Home from "./home";
 import Gallery from "./gallery";
 import Contact from "./contact";
 import ErrorNotFound from "./error";
+import ProductOverview from "./productOverview";
 
 export default function HomePage(){
     return(
        <>
             <Header/>
-            <div className="h-[calc(100vh-100px)] w-full bg-primary">
+            <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
                 <Routes path="/*">
                     <Route path="/contact" element={<Contact/>}/>
                     <Route path="/gallery" element={<Gallery/>}/>
                     <Route path="/items" element={<Items/>}/>
+                    <Route path="/product/:key" element={<ProductOverview/>}/>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/*" element={<ErrorNotFound/>}/>
                 </Routes>
-            </div>
-
+            </main>
         </>
-       
     )
 }
